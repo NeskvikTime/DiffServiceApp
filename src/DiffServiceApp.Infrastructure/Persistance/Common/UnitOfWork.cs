@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 
-namespace DiffServiceApp.Infrastructure.Persistance.Repository;
+namespace DiffServiceApp.Infrastructure.Persistance.Common;
 internal class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _dbContext;

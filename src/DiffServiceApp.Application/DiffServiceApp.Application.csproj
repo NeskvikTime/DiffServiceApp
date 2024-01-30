@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DiffServiceApp.Domain\DiffServiceApp.Domain.csproj" />
+    <ProjectReference Include="..\DiffServiceApp.Contracts\DiffServiceApp.Contracts.csproj" />
+    <ProjectReference Include="..\DiffServiceApp.Domain\DiffServiceApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

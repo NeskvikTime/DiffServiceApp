@@ -1,9 +1,10 @@
 ﻿using System.Text.RegularExpressions;
 
 namespace DiffServiceApp.Application.Extensions;
-internal class Base64StringValidator
+
+internal static class Base64StringValidator
 {
-    public bool IsValidBase64String(string base64String)
+    public static bool IsValidBase64String(this string base64String)
     {
         // Check if the string is null or empty
         if (string.IsNullOrEmpty(base64String))

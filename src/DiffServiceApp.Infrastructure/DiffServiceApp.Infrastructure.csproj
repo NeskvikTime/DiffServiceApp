@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DiffServiceApp.Domain\DiffServiceApp.Domain.csproj" />
     <ProjectReference Include="..\DiffServiceApp.Application\DiffServiceApp.Application.csproj" />
+    <ProjectReference Include="..\DiffServiceApp.Domain\DiffServiceApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

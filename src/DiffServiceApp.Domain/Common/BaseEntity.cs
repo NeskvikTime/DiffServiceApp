@@ -23,5 +23,10 @@ public abstract class BaseEntity
         return Id.GetHashCode();
     }
 
+    protected BaseEntity(int id)
+    {
+        Id = id;
+    }
+
     protected BaseEntity() { }
 }

@@ -9,18 +9,6 @@ public static class Base64StringConverter
         }
         catch (FormatException)
         {
-            throw new ArgumentException("Invalid base64 string");
-        }
-    }
-
-    public static string ToBase64String(this byte[] data)
-    {
-        try
-        {
-            return Convert.ToBase64String(data);
-        }
-        catch (FormatException)
-        {
             throw;
         }
     }

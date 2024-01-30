@@ -1,16 +1,13 @@
 ﻿using DiffServiceApp.Application.Common.Interfaces;
-using DiffServiceApp.Domain.DiffPayloadAggregate;
+using DiffServiceApp.Domain.Aggregates;
+using DiffServiceApp.Infrastructure.Persistance.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiffServiceApp.Infrastructure.Persistance;
 
-internal class ApplicationDbContext : DbContext, IDbInitializer
+internal class ApplicationDbContext(DbContextOptions options) : DbContext(options), IDbInitializer
 {
-    public ApplicationDbContext(DbContextOptions options) : base(options)
-    {
-    }
-
-    public DbSet<DiffPayload> DiffPayloads => Set<DiffPayload>();
+    public DbSet<DiffPayloadCouple> DiffPayloadCouples => Set<DiffPayloadCouple>();
 
     public void Migrate()
     {
@@ -19,6 +16,6 @@ internal class ApplicationDbContext : DbContext, IDbInitializer
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new DiffCoupleConfiguration());
     }
 }
