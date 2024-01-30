@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9AA74C57-12E7-46B3-920D-572A4FD7E771}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4EAD7BAB-CD28-42FF-B3EA-624C9A733BE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffServiceApp.Infrastructure", "src\DiffServiceApp.Infrastructure\DiffServiceApp.Infrastructure.csproj", "{0431C583-C289-45BE-AEE3-D0D0FA5D80BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffServiceApp.Domain", "DiffServiceApp.Domain\DiffServiceApp.Domain.csproj", "{514A1AC9-6E83-4F3B-991F-28D0CEFFB9B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffServiceApp.Application", "src\DiffServiceApp.Application\DiffServiceApp.Application.csproj", "{D58B7830-BDA6-4FB8-89CA-3041F412F842}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffServiceApp.Contracts", "src\DiffServiceApp.Contracts\DiffServiceApp.Contracts.csproj", "{19F6852B-7F1E-44F5-A419-9B243A947073}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffServiceApp.API", "src\DiffServiceApp.API\DiffServiceApp.API.csproj", "{BAFB94E6-0EA6-4A2C-8BCB-3D40B36F4034}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0431C583-C289-45BE-AEE3-D0D0FA5D80BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0431C583-C289-45BE-AEE3-D0D0FA5D80BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0431C583-C289-45BE-AEE3-D0D0FA5D80BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0431C583-C289-45BE-AEE3-D0D0FA5D80BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{514A1AC9-6E83-4F3B-991F-28D0CEFFB9B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{514A1AC9-6E83-4F3B-991F-28D0CEFFB9B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{514A1AC9-6E83-4F3B-991F-28D0CEFFB9B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{514A1AC9-6E83-4F3B-991F-28D0CEFFB9B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D58B7830-BDA6-4FB8-89CA-3041F412F842}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D58B7830-BDA6-4FB8-89CA-3041F412F842}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D58B7830-BDA6-4FB8-89CA-3041F412F842}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D58B7830-BDA6-4FB8-89CA-3041F412F842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F6852B-7F1E-44F5-A419-9B243A947073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F6852B-7F1E-44F5-A419-9B243A947073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F6852B-7F1E-44F5-A419-9B243A947073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F6852B-7F1E-44F5-A419-9B243A947073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAFB94E6-0EA6-4A2C-8BCB-3D40B36F4034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAFB94E6-0EA6-4A2C-8BCB-3D40B36F4034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAFB94E6-0EA6-4A2C-8BCB-3D40B36F4034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAFB94E6-0EA6-4A2C-8BCB-3D40B36F4034}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0431C583-C289-45BE-AEE3-D0D0FA5D80BB} = {9AA74C57-12E7-46B3-920D-572A4FD7E771}
+		{514A1AC9-6E83-4F3B-991F-28D0CEFFB9B6} = {9AA74C57-12E7-46B3-920D-572A4FD7E771}
+		{D58B7830-BDA6-4FB8-89CA-3041F412F842} = {9AA74C57-12E7-46B3-920D-572A4FD7E771}
+		{19F6852B-7F1E-44F5-A419-9B243A947073} = {9AA74C57-12E7-46B3-920D-572A4FD7E771}
+		{BAFB94E6-0EA6-4A2C-8BCB-3D40B36F4034} = {9AA74C57-12E7-46B3-920D-572A4FD7E771}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3FEEFF04-1A70-4EA0-8F62-4C4E2DEF34D7}
+	EndGlobalSection
+EndGlobal
