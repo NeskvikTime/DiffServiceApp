@@ -7,7 +7,7 @@ using DiffServiceApp.Domain.Models;
 using MediatR;
 
 namespace DiffServiceApp.Application.DiffCouple.Update;
-internal class UpdateDiffCommandHandler(IDiffCouplesRepository _diffCouplesRepository,
+sealed class UpdateDiffCommandHandler(IDiffCouplesRepository _diffCouplesRepository,
     IUnitOfWork _unitOfWork) : IRequestHandler<UpdateDiffCommand, DiffPayloadCouple>
 {
     public async Task<DiffPayloadCouple> Handle(UpdateDiffCommand request, CancellationToken cancellationToken)

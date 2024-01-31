@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DiffServiceApp.Infrastructure.Persistance.Configurations;
-public class DiffCoupleConfiguration : IEntityTypeConfiguration<DiffPayloadCouple>
+sealed class DiffCoupleConfiguration : IEntityTypeConfiguration<DiffPayloadCouple>
 {
     public void Configure(EntityTypeBuilder<DiffPayloadCouple> builder)
     {

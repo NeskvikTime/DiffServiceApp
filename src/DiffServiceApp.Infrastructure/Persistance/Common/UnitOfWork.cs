@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 
 namespace DiffServiceApp.Infrastructure.Persistance.Common;
-internal class UnitOfWork : IUnitOfWork
+sealed class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly ILogger<UnitOfWork> _logger;

@@ -6,7 +6,7 @@ using DiffServiceApp.Domain.Models;
 using MediatR;
 
 namespace DiffServiceApp.Application.DiffCouple.Queries.GetResult;
-internal class GetDiffResultQueryHandler(IDiffCouplesRepository _diffCouplesRepository,
+sealed class GetDiffResultQueryHandler(IDiffCouplesRepository _diffCouplesRepository,
     IDiffCoupleProcessor _processor) : IRequestHandler<GetDiffResultQuery, GetResultResponse>
 {
     public async Task<GetResultResponse> Handle(GetDiffResultQuery request, CancellationToken cancellationToken)

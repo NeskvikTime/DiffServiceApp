@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace DiffServiceApp.Infrastructure.Persistance;
 
-public class SaveChangesInterceptor(IDateTimeProvider _dateTimeProvider) : ISaveChangesInterceptor
+sealed class SaveChangesInterceptor(IDateTimeProvider _dateTimeProvider) : ISaveChangesInterceptor
 {
     public InterceptionResult<int> SavingChanges(
         DbContextEventData eventData,

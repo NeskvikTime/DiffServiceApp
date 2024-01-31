@@ -5,7 +5,7 @@ using DiffServiceApp.Domain.Models;
 
 namespace DiffServiceApp.Application.Services;
 
-public class DiffCoupleProcessor : IDiffCoupleProcessor
+sealed class DiffCoupleProcessor : IDiffCoupleProcessor
 {
     public DiffResult GetDiffResult(DiffPayloadCouple dataPayload)
     {

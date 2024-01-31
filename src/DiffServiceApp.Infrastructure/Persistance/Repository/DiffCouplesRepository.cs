@@ -3,7 +3,7 @@ using DiffServiceApp.Domain.Aggregates;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiffServiceApp.Infrastructure.Persistance.Repository;
-internal class DiffCouplesRepository(ApplicationDbContext _dbContext) : IDiffCouplesRepository
+sealed class DiffCouplesRepository(ApplicationDbContext _dbContext) : IDiffCouplesRepository
 {
     public async Task CreateDiffCoupleAsync(DiffPayloadCouple diffPayload, CancellationToken cancellationToken)
     {

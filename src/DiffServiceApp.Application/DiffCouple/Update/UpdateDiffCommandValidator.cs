@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace DiffServiceApp.Application.DiffCouple.Update;
 
-public class UpdateDiffCommandValidator : AbstractValidator<UpdateDiffCommand>
+sealed class UpdateDiffCommandValidator : AbstractValidator<UpdateDiffCommand>
 {
     public UpdateDiffCommandValidator()
     {

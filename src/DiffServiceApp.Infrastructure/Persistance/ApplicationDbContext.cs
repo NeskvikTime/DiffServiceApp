@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiffServiceApp.Infrastructure.Persistance;
 
-internal class ApplicationDbContext(DbContextOptions options) : DbContext(options), IDbInitializer
+sealed class ApplicationDbContext(DbContextOptions options) : DbContext(options), IDbInitializer
 {
     public DbSet<DiffPayloadCouple> DiffPayloadCouples => Set<DiffPayloadCouple>();
 
