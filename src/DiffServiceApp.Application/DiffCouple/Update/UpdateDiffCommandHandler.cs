@@ -8,11 +8,11 @@ using MediatR;
 
 namespace DiffServiceApp.Application.DiffCouple.Update;
 internal class UpdateDiffCommandHandler(IDiffCouplesRepository _diffCouplesRepository,
-    IUnitOfWork _unitOfWork) : IRequestHandler<UpdateDiffCommand, Unit>
+    IUnitOfWork _unitOfWork) : IRequestHandler<UpdateDiffCommand, DiffPayloadCouple>
 {
-    public async Task<Unit> Handle(UpdateDiffCommand request, CancellationToken cancellationToken)
+    public async Task<DiffPayloadCouple> Handle(UpdateDiffCommand request, CancellationToken cancellationToken)
     {
-        DiffPayloadCouple diifCouple;
+        DiffPayloadCouple? diifCouple;
 
         if (!await _diffCouplesRepository.DiffCoupleExistsAsync(request.Id, cancellationToken))
         {
@@ -20,7 +20,7 @@ internal class UpdateDiffCommandHandler(IDiffCouplesRepository _diffCouplesRepos
 
             await _diffCouplesRepository.CreateDiffCoupleAsync(diifCouple, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
-            return Unit.Value;
+            return diifCouple;
         }
 
         diifCouple = await _diffCouplesRepository.GetDiffCoupleAsync(request.Id, cancellationToken);
@@ -36,14 +36,14 @@ internal class UpdateDiffCommandHandler(IDiffCouplesRepository _diffCouplesRepos
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return Unit.Value;
+        return diifCouple;
     }
 
     private void UpdateDiffPayloadCouple(DiffPayloadCouple diffPayloadCouple, string requestSide, string data)
     {
         byte[] dataToAssign = data.FromBase64String();
 
-        if (requestSide == DiffSide.Left)
+        if (requestSide == DiffDirection.Left)
         {
             diffPayloadCouple.LeftPayloadValue = dataToAssign;
             return;
@@ -57,7 +57,7 @@ internal class UpdateDiffCommandHandler(IDiffCouplesRepository _diffCouplesRepos
     {
         byte[] dataToAssign = data.FromBase64String();
 
-        if (requestSide == DiffSide.Left)
+        if (requestSide == DiffDirection.Left)
         {
             return new DiffPayloadCouple(coupleId, leftPayloadValue: dataToAssign);
         }

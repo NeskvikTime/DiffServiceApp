@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiffServiceApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240130210247_Initial")]
+    [Migration("20240131094650_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -43,6 +43,9 @@ namespace DiffServiceApp.Infrastructure.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
 
                     b.ToTable("DiffPayloadCouples");
                 });

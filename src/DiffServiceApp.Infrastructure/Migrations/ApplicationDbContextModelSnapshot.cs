@@ -41,6 +41,9 @@ namespace DiffServiceApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Id")
+                        .IsUnique();
+
                     b.ToTable("DiffPayloadCouples");
                 });
 #pragma warning restore 612, 618

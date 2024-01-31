@@ -2,6 +2,7 @@
 using DiffServiceApp.Application.DiffCouple.Update;
 using DiffServiceApp.Contracts.Requests;
 using DiffServiceApp.Contracts.Responses;
+using DiffServiceApp.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,16 +24,25 @@ public class DiffController(ISender _sender) : ControllerBase
         return Ok(result);
     }
 
-
-    [HttpPut("{id:int}/{side}")]
+    [HttpPut("{id:int}/left")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> PutAsync(int id, [FromRoute] string side, [FromBody] UpdateDiffValueRequest request)
+    public async Task<IActionResult> PutLeftAsync(int id, [FromBody] UpdateDiffValueRequest request)
     {
-        var command = new UpdateDiffCommand(id, request.Data, side);
+        var command = new UpdateDiffCommand(id, request.Data, DiffDirection.Left);
+        var response = await _sender.Send(command);
 
-        await _sender.Send(command);
+        return Created(nameof(PutLeftAsync), response);
+    }
 
-        return Created();
+    [HttpPut("{id:int}/right")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> PutRightAsync(int id, [FromBody] UpdateDiffValueRequest request)
+    {
+        var command = new UpdateDiffCommand(id, request.Data, DiffDirection.Right);
+        var response = await _sender.Send(command);
+
+        return Created(nameof(PutRightAsync), response);
     }
 }

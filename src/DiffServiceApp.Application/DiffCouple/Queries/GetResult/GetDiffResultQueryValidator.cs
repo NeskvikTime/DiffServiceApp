@@ -1,5 +1,4 @@
 ﻿using DiffServiceApp.Application.Common.Interfaces;
-using DiffServiceApp.Contracts;
 using FluentValidation;
 
 namespace DiffServiceApp.Application.DiffCouple.Queries.GetResult;
@@ -14,8 +13,8 @@ internal class GetDiffResultQueryValidator : AbstractValidator<GetDiffResultQuer
         RuleFor(x => x.Id)
             .GreaterThan(0)
             .MustAsync(async (id, cancellationToken) => await _diffCouplesRepository.DiffCoupleExistsAsync(id, cancellationToken))
-            .WithErrorCode(ErrorCodes.NotFound)
+            .WithMessage("Diff couple with Id: '{PropertyValue}' not found.")
             .MustAsync(async (id, cancellationToken) => await _diffCouplesRepository.HasBothValuesAssignedAsync(id, cancellationToken))
-            .WithErrorCode(ErrorCodes.BadRequest);
+            .WithMessage("Diff couple with Id: '{PropertyValue}' does not have both sides assigned.");
     }
 }

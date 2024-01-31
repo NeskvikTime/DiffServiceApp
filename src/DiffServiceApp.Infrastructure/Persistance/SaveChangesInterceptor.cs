@@ -1,6 +1,7 @@
 using DiffServiceApp.Domain.Common;
 using DiffServiceApp.Domain.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace DiffServiceApp.Infrastructure.Persistance;
@@ -20,16 +21,7 @@ public class SaveChangesInterceptor(IDateTimeProvider _dateTimeProvider) : ISave
 
         DateTime savingDateTime = _dateTimeProvider.UtcNow;
 
-        foreach (var entry in _context.ChangeTracker.Entries<BaseEntity>()
-            .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
-        {
-            entry.Entity.DateModified = savingDateTime;
-
-            if (entry.State == EntityState.Added)
-            {
-                entry.Entity.DateCreated = savingDateTime;
-            }
-        }
+        UpdateEntityDates(_context.ChangeTracker.Entries<BaseEntity>(), savingDateTime);
 
         return result;
     }
@@ -42,4 +34,16 @@ public class SaveChangesInterceptor(IDateTimeProvider _dateTimeProvider) : ISave
         return ValueTask.FromResult(SavingChanges(eventData, result));
     }
 
+    private void UpdateEntityDates(IEnumerable<EntityEntry<BaseEntity>> entries, DateTime savingDateTime)
+    {
+        foreach (var entry in entries.Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
+        {
+            entry.Entity.DateModified = savingDateTime;
+
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.DateCreated = savingDateTime;
+            }
+        }
+    }
 }

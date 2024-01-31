@@ -9,6 +9,9 @@ public class DiffCoupleConfiguration : IEntityTypeConfiguration<DiffPayloadCoupl
     {
         builder.HasKey(e => e.Id);
 
+        builder.HasIndex(e => e.Id)
+            .IsUnique();
+
         builder.Property(e => e.Id)
             .ValueGeneratedNever()
             .IsRequired();

@@ -1,5 +1,4 @@
 ﻿using DiffServiceApp.Application.Extensions;
-using DiffServiceApp.Contracts;
 using DiffServiceApp.Domain.Models;
 using FluentValidation;
 
@@ -12,12 +11,13 @@ public class UpdateDiffCommandValidator : AbstractValidator<UpdateDiffCommand>
         RuleFor(x => x.Data)
             .NotEmpty()
             .Must(data => data.IsValidBase64String())
-            .WithErrorCode(ErrorCodes.BadRequest);
+            .WithMessage("Data must be a valid Base64 string.");
+
 
         RuleFor(x => x.Side)
             .NotEmpty()
-            .Must(side => string.Equals(nameof(DiffSide.Left), side, StringComparison.OrdinalIgnoreCase)
-                || string.Equals(nameof(DiffSide.Right), side, StringComparison.OrdinalIgnoreCase))
-            .WithErrorCode(ErrorCodes.BadRequest);
+            .Must(side => string.Equals(nameof(DiffDirection.Left), side, StringComparison.OrdinalIgnoreCase)
+                || string.Equals(nameof(DiffDirection.Right), side, StringComparison.OrdinalIgnoreCase))
+            .WithMessage("Side must be either 'left' or 'right'.");
     }
 }

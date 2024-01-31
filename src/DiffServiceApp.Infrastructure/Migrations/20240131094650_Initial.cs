@@ -25,6 +25,12 @@ namespace DiffServiceApp.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_DiffPayloadCouples", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DiffPayloadCouples_Id",
+                table: "DiffPayloadCouples",
+                column: "Id",
+                unique: true);
         }
 
         /// <inheritdoc />

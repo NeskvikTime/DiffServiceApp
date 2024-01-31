@@ -1,5 +1,4 @@
-﻿using DiffServiceApp.Contracts;
-using DiffServiceApp.Contracts.Exceptions;
+﻿using DiffServiceApp.Contracts.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -10,30 +9,38 @@ public class ExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {
-        switch (context.Exception)
+        ProblemDetails? problemDetails = null;
+
+        problemDetails = context.Exception switch
         {
-            case ValidationException validationException:
+            // FluentValidationException is thrown by FluentValidation
+            ValidationException validationException => new ProblemDetails
+            {
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+                Status = StatusCodes.Status400BadRequest,
+                Title = "Validation error",
+                Detail = string.Join(" ", validationException.Errors
+                                    .Select(e => e.ErrorMessage))
+            },
 
-                var failure = validationException.Errors.FirstOrDefault(exception => exception.ErrorCode == ErrorCodes.NotFound);
+            // BadRequestException is thrown by the application
+            NotFoundException _ => new ProblemDetails
+            {
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+                Status = StatusCodes.Status404NotFound,
+                Title = "Not found",
+                Detail = context.Exception.Message
+            },
 
-                // If there is a NotFound validation error, return 404
-                if (failure is not null)
-                {
-                    context.Result = new StatusCodeResult(StatusCodes.Status404NotFound);
-                    break;
-                }
-
-                // Default case is BadRequest 400
-                context.Result = new StatusCodeResult(StatusCodes.Status400BadRequest);
-                break;
-
-            case NotFoundException _:
-                context.Result = new StatusCodeResult(StatusCodes.Status404NotFound);
-                break;
-
-            default:
-                context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
-                break;
-        }
+            // Other exceptions inside application , than internal server error is returned
+            _ => new ProblemDetails
+            {
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
+                Status = StatusCodes.Status500InternalServerError,
+                Title = "Internal server error",
+                Detail = context.Exception?.InnerException?.Message ?? context.Exception?.Message
+            },
+        };
+        context.Result = new JsonResult(problemDetails) { StatusCode = problemDetails!.Status };
     }
 }
