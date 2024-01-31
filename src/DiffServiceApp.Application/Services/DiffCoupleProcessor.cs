@@ -39,7 +39,7 @@ public class DiffCoupleProcessor : IDiffCoupleProcessor
                 }
 
                 diffs.Add(new DiffPosition(i, length));
-                i += length - 1;
+                i += (length - 1);
             }
         }
 
