@@ -1,16 +1,16 @@
-﻿using DiffServiceApp.Application.Extensions;
-using DiffServiceApp.Domain.Models;
+﻿using DiffServiceApp.Domain.Models;
 using FluentValidation;
+using System.Buffers.Text;
 
 namespace DiffServiceApp.Application.DiffCouple.Update;
 
-sealed class UpdateDiffCommandValidator : AbstractValidator<UpdateDiffCommand>
+public class UpdateDiffCommandValidator : AbstractValidator<UpdateDiffCommand>
 {
     public UpdateDiffCommandValidator()
     {
         RuleFor(x => x.Data)
             .NotEmpty()
-            .Must(data => data.IsValidBase64String())
+            .Must(data => Base64.IsValid(data))
             .WithMessage("Data must be a valid Base64 string.");
 
 

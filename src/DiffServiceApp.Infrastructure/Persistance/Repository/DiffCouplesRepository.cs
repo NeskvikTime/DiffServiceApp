@@ -3,7 +3,7 @@ using DiffServiceApp.Domain.Aggregates;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiffServiceApp.Infrastructure.Persistance.Repository;
-sealed class DiffCouplesRepository(ApplicationDbContext _dbContext) : IDiffCouplesRepository
+sealed internal class DiffCouplesRepository(ApplicationDbContext _dbContext) : IDiffCouplesRepository
 {
     public async Task CreateDiffCoupleAsync(DiffPayloadCouple diffPayload, CancellationToken cancellationToken)
     {
@@ -28,6 +28,13 @@ sealed class DiffCouplesRepository(ApplicationDbContext _dbContext) : IDiffCoupl
         return await _dbContext.DiffPayloadCouples
             .AsNoTracking()
             .AnyAsync(x => x.Id == id && x.LeftPayloadValue != null && x.RightPayloadValue != null, cancellationToken);
+    }
+
+    public Task RemoveDiffPayloadCoupleAsync(DiffPayloadCouple diffPayload, CancellationToken cancellationToken)
+    {
+        _dbContext.DiffPayloadCouples.Remove(diffPayload);
+
+        return Task.CompletedTask;
     }
 
     public Task UpdateDiffPayloadAsync(DiffPayloadCouple diffPayload, CancellationToken cancellationToken)

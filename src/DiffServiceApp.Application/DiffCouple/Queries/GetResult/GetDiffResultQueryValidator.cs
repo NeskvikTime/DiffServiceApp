@@ -2,7 +2,7 @@
 using FluentValidation;
 
 namespace DiffServiceApp.Application.DiffCouple.Queries.GetResult;
-sealed class GetDiffResultQueryValidator : AbstractValidator<GetDiffResultQuery>
+public class GetDiffResultQueryValidator : AbstractValidator<GetDiffResultQuery>
 {
     private readonly IDiffCouplesRepository _diffCouplesRepository;
 
