@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Testcontainers.MsSql;
 
-namespace DiffServiceApp.API.SubcutaneousTests;
+namespace DiffServiceApp.API.SubcutaneousTests.Common;
 public class ApplicationApiFactory : WebApplicationFactory<IAssemblyMarker>, IAsyncLifetime
 {
     private readonly MsSqlContainer _dbContainer =

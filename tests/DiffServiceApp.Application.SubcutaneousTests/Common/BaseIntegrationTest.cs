@@ -4,7 +4,7 @@ using DiffServiceApp.Infrastructure.Persistance;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiffServiceApp.API.SubcutaneousTests;
+namespace DiffServiceApp.Application.SubcutaneousTests.Common;
 public abstract class BaseIntegrationTest
     : IClassFixture<ApplicationApiFactory>,
       IDisposable

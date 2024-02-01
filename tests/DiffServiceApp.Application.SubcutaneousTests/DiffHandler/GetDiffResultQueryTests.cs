@@ -1,9 +1,11 @@
 ﻿using DiffServiceApp.Application.DiffCouple.Queries.GetResult;
+using DiffServiceApp.Application.SubcutaneousTests.Common;
 using DiffServiceApp.Contracts.Common;
+using DiffServiceApp.Contracts.Exceptions;
 using DiffServiceApp.Domain.Aggregates;
 using DiffServiceApp.Domain.Enums;
 
-namespace DiffServiceApp.API.SubcutaneousTests.DiffHandler;
+namespace DiffServiceApp.Application.SubcutaneousTests.DiffHandler;
 public class GetDiffResultQueryTests : BaseIntegrationTest
 {
     private readonly Random _randomGenerator;
@@ -16,18 +18,18 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
     [Theory]
     [InlineData(0)]
     [InlineData(-1)]
-    public async Task GetDiffResultQuery_ShouldThrowValidationException_WhenIdIsInvalid(int invalidId)
+    public async Task GetDiffResultQuery_ShouldThrowNotFoundException_WhenIdIsInvalid(int invalidId)
     {
         // Arrange
         var query = new GetDiffResultQuery(invalidId);
 
         // Act & Assert
         Func<Task> act = async () => await _sender.Send(query);
-        await act.Should().ThrowAsync<ValidationException>();
+        await act.Should().ThrowAsync<NotFoundException>();
     }
 
     [Fact]
-    public async Task GetDiffResultQuery_ShouldThrowValidationException_WhenIdDoesNotExist()
+    public async Task GetDiffResultQuery_ShouldThrowNotFoundException_WhenIdDoesNotExist()
     {
         // Arrange
         var nonExistentId = _randomGenerator.Next(1000, 2000);
@@ -35,7 +37,7 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
 
         // Act & Assert
         Func<Task> act = async () => await _sender.Send(query);
-        await act.Should().ThrowAsync<ValidationException>();
+        await act.Should().ThrowAsync<NotFoundException>();
     }
 
     [Fact]
@@ -68,7 +70,7 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
     }
 
     [Fact]
-    public async Task GetDiffResultQuery_ShouldThrowValidationException_WhenOnlyLeftSideIsAssigned()
+    public async Task GetDiffResultQuery_ShouldThrowNotFoundException_WhenOnlyLeftSideIsAssigned()
     {
         // Arrange
         var idWithOnlyLeft = _randomGenerator.Next(0, 1000);
@@ -82,11 +84,11 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
 
         // Act & Assert
         Func<Task> act = async () => await _sender.Send(query);
-        await act.Should().ThrowAsync<ValidationException>();
+        await act.Should().ThrowAsync<NotFoundException>();
     }
 
     [Fact]
-    public async Task GetDiffResultQuery_ShouldThrowValidationException_WhenOnlyRightSideIsAssigned()
+    public async Task GetDiffResultQuery_ShouldThrowNotFoundException_WhenOnlyRightSideIsAssigned()
     {
         // Arrange
         var idWithOnlyRight = _randomGenerator.Next(0, 1000);
@@ -100,7 +102,7 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
 
         // Act & Assert
         Func<Task> act = async () => await _sender.Send(query);
-        await act.Should().ThrowAsync<ValidationException>();
+        await act.Should().ThrowAsync<NotFoundException>();
     }
 
     [Fact]

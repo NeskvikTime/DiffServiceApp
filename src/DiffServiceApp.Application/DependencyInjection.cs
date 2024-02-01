@@ -17,6 +17,7 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IDiffCoupleProcessor, DiffCoupleProcessor>();
+        services.AddScoped<IDiffProcessor, DiffProcessor>();
 
         services.AddValidatorsFromAssemblyContaining(typeof(DependencyInjection));
 

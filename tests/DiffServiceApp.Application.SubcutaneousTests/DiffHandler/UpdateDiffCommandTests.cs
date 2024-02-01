@@ -1,7 +1,8 @@
 ﻿using DiffServiceApp.Application.DiffCouple.Update;
+using DiffServiceApp.Application.SubcutaneousTests.Common;
 using System.Text;
 
-namespace DiffServiceApp.API.SubcutaneousTests.DiffHandler;
+namespace DiffServiceApp.Application.SubcutaneousTests.DiffHandler;
 public class UpdateDiffCommandTests : BaseIntegrationTest
 {
     private readonly Random _randomGenerator;

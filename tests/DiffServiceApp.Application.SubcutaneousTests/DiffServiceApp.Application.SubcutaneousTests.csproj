@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\DiffServiceApp.API\DiffServiceApp.API.csproj" />
     <ProjectReference Include="..\..\src\DiffServiceApp.Infrastructure\DiffServiceApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\TestCommon\TestCommon.csproj" />
   </ItemGroup>
 
 </Project>
