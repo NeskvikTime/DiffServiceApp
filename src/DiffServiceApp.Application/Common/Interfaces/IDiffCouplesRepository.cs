@@ -14,5 +14,4 @@ public interface IDiffCouplesRepository
 
     Task<bool> HasBothValuesAssignedAsync(int id, CancellationToken cancellationToken);
 
-    Task RemoveDiffPayloadCoupleAsync(DiffPayloadCouple diffPayload, CancellationToken cancellationToken);
 }

@@ -7,7 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFrameworkCore.Testing.NSubstitute" Version="8.0.0" />
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.1" />
+    <PackageReference Include="NSubstitute" Version="5.1.0" />
+    <PackageReference Include="Testcontainers" Version="3.7.0" />
+    <PackageReference Include="Testcontainers.MsSql" Version="3.7.0" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.6.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DiffServiceApp.API\DiffServiceApp.API.csproj" />
+    <ProjectReference Include="..\..\src\DiffServiceApp.Contracts\DiffServiceApp.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\DiffServiceApp.Domain\DiffServiceApp.Domain.csproj" />
+    <ProjectReference Include="..\..\src\DiffServiceApp.Infrastructure\DiffServiceApp.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

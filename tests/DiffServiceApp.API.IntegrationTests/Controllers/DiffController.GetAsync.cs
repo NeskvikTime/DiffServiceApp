@@ -1,9 +1,8 @@
-﻿using DiffServiceApp.API.SubcutaneousTests.Common;
-using DiffServiceApp.Contracts.Common;
+﻿using DiffServiceApp.Contracts.Common;
 using DiffServiceApp.Contracts.Responses;
-using FluentAssertions;
 using System.Net;
 using System.Net.Http.Json;
+using TestCommon.DiffServiceApp;
 
 namespace DiffServiceApp.API.IntegrationTests.Controllers;
 public class GetAsyncTests : BaseIntegrationTest

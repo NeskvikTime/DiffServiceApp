@@ -1,9 +1,9 @@
 ﻿using DiffServiceApp.Application.DiffCouple.Queries.GetResult;
-using DiffServiceApp.Application.SubcutaneousTests.Common;
 using DiffServiceApp.Contracts.Common;
 using DiffServiceApp.Contracts.Exceptions;
 using DiffServiceApp.Domain.Aggregates;
 using DiffServiceApp.Domain.Enums;
+using TestCommon.DiffServiceApp;
 
 namespace DiffServiceApp.Application.SubcutaneousTests.DiffHandler;
 public class GetDiffResultQueryTests : BaseIntegrationTest

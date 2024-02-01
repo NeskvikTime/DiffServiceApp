@@ -1,4 +1,5 @@
-﻿using DiffServiceApp.Infrastructure.Persistance;
+﻿using DiffServiceApp.API;
+using DiffServiceApp.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -8,8 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Testcontainers.MsSql;
+using Xunit;
 
-namespace DiffServiceApp.API.SubcutaneousTests.Common;
+namespace TestCommon.DiffServiceApp;
 public class ApplicationApiFactory : WebApplicationFactory<IAssemblyMarker>, IAsyncLifetime
 {
     private readonly MsSqlContainer _dbContainer =

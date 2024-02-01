@@ -30,13 +30,6 @@ sealed internal class DiffCouplesRepository(ApplicationDbContext _dbContext) : I
             .AnyAsync(x => x.Id == id && x.LeftPayloadValue != null && x.RightPayloadValue != null, cancellationToken);
     }
 
-    public Task RemoveDiffPayloadCoupleAsync(DiffPayloadCouple diffPayload, CancellationToken cancellationToken)
-    {
-        _dbContext.DiffPayloadCouples.Remove(diffPayload);
-
-        return Task.CompletedTask;
-    }
-
     public Task UpdateDiffPayloadAsync(DiffPayloadCouple diffPayload, CancellationToken cancellationToken)
     {
         _dbContext.DiffPayloadCouples.Update(diffPayload);

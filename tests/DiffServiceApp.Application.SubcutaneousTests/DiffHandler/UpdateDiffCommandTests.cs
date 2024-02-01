@@ -1,6 +1,6 @@
 ﻿using DiffServiceApp.Application.DiffCouple.Update;
-using DiffServiceApp.Application.SubcutaneousTests.Common;
 using System.Text;
+using TestCommon.DiffServiceApp;
 
 namespace DiffServiceApp.Application.SubcutaneousTests.DiffHandler;
 public class UpdateDiffCommandTests : BaseIntegrationTest

@@ -32,7 +32,7 @@ sealed class UpdateDiffCommandHandler(IDiffCouplesRepository _diffCouplesReposit
 
         UpdateDiffPayloadCouple(diifCouple, request.Side, request.Data);
 
-        //await _diffCouplesRepository.UpdateDiffPayloadAsync(diifCouple, cancellationToken);
+        await _diffCouplesRepository.UpdateDiffPayloadAsync(diifCouple, cancellationToken);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
