@@ -1,7 +1,6 @@
 ﻿using DiffServiceApp.Application.Services;
 using DiffServiceApp.Domain.Enums;
 using DiffServiceApp.Domain.Models;
-using FluentAssertions;
 
 namespace DiffServiceApp.Application.UnitTests.Services;
 
@@ -130,7 +129,7 @@ public class DiffProcessorTests
         // Assert
         result.DiffResultType.Should().Be(ResultType.ContentDoNotMatch);
         result.Diffs.Should().HaveCount(2);
-        result.Diffs[0].Offset.Should().Be(1);
+        result.Diffs![0].Offset.Should().Be(1);
         result.Diffs[0].Length.Should().Be(1);
         result.Diffs[1].Offset.Should().Be(3);
         result.Diffs[1].Length.Should().Be(1);

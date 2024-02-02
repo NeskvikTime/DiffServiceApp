@@ -27,7 +27,7 @@ public class UpdateDiffCommandTests : BaseIntegrationTest
         UpdateDiffCommand commadn = new UpdateDiffCommand(id, data, diffDirection);
 
         // Act
-        var result = await _sender.Send(commadn);
+        var result = await _sender.Send(commadn, cancellationToken);
 
         // Assert
         result.Id.Should().Be(id);
@@ -52,7 +52,7 @@ public class UpdateDiffCommandTests : BaseIntegrationTest
         UpdateDiffCommand commadn = new UpdateDiffCommand(id, data, diffDirection);
 
         // Act
-        var result = await _sender.Send(commadn);
+        var result = await _sender.Send(commadn, cancellationToken);
 
         // Assert
         result.Id.Should().Be(id);
@@ -70,10 +70,14 @@ public class UpdateDiffCommandTests : BaseIntegrationTest
         var invalidData = "NotBase64String";
         var diffDirection = nameof(DiffDirection.Left);
 
+        var cancellationToken = CancellationToken.None;
+
         var command = new UpdateDiffCommand(id, invalidData, diffDirection);
 
-        // Act & Assert
-        Func<Task> act = async () => await _sender.Send(command);
+        // Act
+        Func<Task> act = async () => await _sender.Send(command, cancellationToken);
+
+        // Assert
         await act.Should().ThrowAsync<ValidationException>();
     }
 
@@ -86,10 +90,14 @@ public class UpdateDiffCommandTests : BaseIntegrationTest
         var id = _randomGenerator.Next(0, 1000);
         var diffDirection = nameof(DiffDirection.Left);
 
+        var cancellationToken = CancellationToken.None;
+
         var command = new UpdateDiffCommand(id, data, diffDirection);
 
-        // Act & Assert
-        Func<Task> act = async () => await _sender.Send(command);
+        // Act
+        Func<Task> act = async () => await _sender.Send(command, cancellationToken);
+
+        // Assert
         await act.Should().ThrowAsync<ValidationException>();
     }
 
@@ -101,10 +109,14 @@ public class UpdateDiffCommandTests : BaseIntegrationTest
         var data = "AAAAAA==";
         var invalidDiffDirection = "InvalidDirection"; // Not a valid direction
 
+        var cancellationToken = CancellationToken.None;
+
         var command = new UpdateDiffCommand(id, data, invalidDiffDirection);
 
-        // Act & Assert
-        Func<Task> act = async () => await _sender.Send(command);
+        // Act
+        Func<Task> act = async () => await _sender.Send(command, cancellationToken);
+
+        // Assert
         await act.Should().ThrowAsync<ValidationException>();
     }
 
@@ -116,11 +128,13 @@ public class UpdateDiffCommandTests : BaseIntegrationTest
         var data = "AAAAAA==";
         var diffDirection = DiffDirection.Left;
 
+        var cancellationToken = CancellationToken.None;
+
         var command = new UpdateDiffCommand(id, data, diffDirection);
-        await _sender.Send(command); // First submission
+        await _sender.Send(command, cancellationToken); // First submission
 
         // Act
-        var result = await _sender.Send(command);
+        var result = await _sender.Send(command, cancellationToken);
 
         // Assert
         result.Id.Should().Be(id);
@@ -136,10 +150,12 @@ public class UpdateDiffCommandTests : BaseIntegrationTest
         var base64LargeData = Convert.ToBase64String(Encoding.UTF8.GetBytes(largeData));
         var diffDirection = DiffDirection.Left;
 
+        var cancellationToken = CancellationToken.None;
+
         var command = new UpdateDiffCommand(id, base64LargeData, diffDirection);
 
         // Act
-        var result = await _sender.Send(command);
+        var result = await _sender.Send(command, cancellationToken);
 
         // Assert
         result.Id.Should().Be(id);

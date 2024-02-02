@@ -1,7 +1,4 @@
-﻿using DiffServiceApp.Domain.Aggregates;
-using System.Net;
-using System.Net.Http.Json;
-using TestCommon.Common;
+﻿using DiffServiceApp.Contracts.Requests;
 
 namespace DiffServiceApp.API.IntegrationTests.Controllers;
 public class PutAsyncTests : BaseIntegrationTest
@@ -19,7 +16,7 @@ public class PutAsyncTests : BaseIntegrationTest
         // Arrange
         int id = 1;
         var base64Data = "AAAAAA==";
-        var data = new { data = base64Data };
+        var data = new UpdateDiffValueRequest(base64Data);
         var url = $"/v1/diff/{id}/left";
         var expectedPayload = Convert.FromBase64String(base64Data);
 
@@ -41,7 +38,7 @@ public class PutAsyncTests : BaseIntegrationTest
         // Arrange
         int id = 1;
         var base64Data = "AAAAAA==";
-        var data = new { data = base64Data };
+        var data = new UpdateDiffValueRequest(base64Data);
         var url = $"/v1/diff/{id}/right";
         var expectedPayload = Convert.FromBase64String(base64Data);
 
@@ -62,7 +59,7 @@ public class PutAsyncTests : BaseIntegrationTest
     {
         // Arrange
         var id = "4";
-        var invalidData = new { data = "InvalidBase64==" };
+        var invalidData = new UpdateDiffValueRequest("InvalidBase64==");
         var url = $"/v1/diff/{id}/left";
 
         // Act
@@ -77,7 +74,7 @@ public class PutAsyncTests : BaseIntegrationTest
     {
         // Arrange
         var id = "5";
-        var emptyData = new { data = "" };
+        var emptyData = new UpdateDiffValueRequest("");
         var url = $"/v1/diff/{id}/right";
 
         // Act

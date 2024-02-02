@@ -2,11 +2,9 @@
 using DiffServiceApp.Application.DiffCouple.Update;
 using DiffServiceApp.Domain.Aggregates;
 using DiffServiceApp.Domain.Models;
-using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
-using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 
 namespace DiffServiceApp.Application.UnitTests.Validation;

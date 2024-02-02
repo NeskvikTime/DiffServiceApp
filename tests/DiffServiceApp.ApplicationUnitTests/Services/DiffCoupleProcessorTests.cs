@@ -3,8 +3,6 @@ using DiffServiceApp.Application.Services;
 using DiffServiceApp.Domain.Aggregates;
 using DiffServiceApp.Domain.Enums;
 using DiffServiceApp.Domain.Models;
-using FluentAssertions;
-using NSubstitute;
 using TestCommon.Builders;
 
 namespace DiffServiceApp.Application.UnitTests.Services;
@@ -26,7 +24,9 @@ public class DiffCoupleProcessorTests
             .WithId(1)
             .Build();
 
-        _diffProcessor.Process(Arg.Any<byte[]>(), Arg.Any<byte[]>()).Returns(new DiffResult { DiffResultType = ResultType.Equals });
+        _diffProcessor.Process(Arg.Any<byte[]>(),
+            Arg.Any<byte[]>())
+            .Returns(new DiffResult { DiffResultType = ResultType.Equals });
 
         // Act
         var result = _diffCoupleProcessor.GetDiffResult(dataPayload);
@@ -43,14 +43,16 @@ public class DiffCoupleProcessorTests
         var leftPayload = new byte[] { 1, 2, 3 };
         var dataPayload = new DiffPayloadCouple(1, leftPayload, null);
 
-        _diffProcessor.Process(Arg.Any<byte[]>(), Arg.Any<byte[]>()).Returns(new DiffResult { DiffResultType = ResultType.ContentDoNotMatch });
+        _diffProcessor.Process(Arg.Any<byte[]>(), Arg.Any<byte[]>())
+            .Returns(new DiffResult { DiffResultType = ResultType.ContentDoNotMatch });
 
         // Act
         var result = _diffCoupleProcessor.GetDiffResult(dataPayload);
 
         // Assert
         result.DiffResultType.Should().Be(ResultType.ContentDoNotMatch);
-        _diffProcessor.Received(1).Process(Arg.Is<byte[]>(x => x.SequenceEqual(leftPayload)), Arg.Is<byte[]>(x => x.Length == 0));
+        _diffProcessor.Received(1)
+            .Process(Arg.Is<byte[]>(x => x.SequenceEqual(leftPayload)), Arg.Is<byte[]>(x => x.Length == 0));
     }
 
     [Fact]

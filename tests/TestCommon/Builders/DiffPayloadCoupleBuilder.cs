@@ -2,6 +2,7 @@
 using TestCommon.Common.Interfaces;
 
 namespace TestCommon.Builders;
+
 public class DiffPayloadCoupleBuilder : IBuilder<DiffPayloadCouple>
 {
     private int _id;

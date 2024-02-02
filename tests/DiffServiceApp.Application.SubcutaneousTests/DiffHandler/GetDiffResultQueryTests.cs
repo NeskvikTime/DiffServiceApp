@@ -1,8 +1,7 @@
 ﻿using DiffServiceApp.Application.DiffCouple.Queries.GetResult;
 using DiffServiceApp.Contracts.Common;
 using DiffServiceApp.Contracts.Exceptions;
-using DiffServiceApp.Domain.Aggregates;
-using DiffServiceApp.Domain.Enums;
+using TestCommon.Builders;
 using TestCommon.Common;
 
 namespace DiffServiceApp.Application.SubcutaneousTests.DiffHandler;
@@ -23,8 +22,12 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
         // Arrange
         var query = new GetDiffResultQuery(invalidId);
 
-        // Act & Assert
-        Func<Task> act = async () => await _sender.Send(query);
+        var cancellationToken = CancellationToken.None;
+
+        // Act
+        Func<Task> act = async () => await _sender.Send(query, cancellationToken);
+
+        // Assert
         await act.Should().ThrowAsync<NotFoundException>();
     }
 
@@ -35,8 +38,12 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
         var nonExistentId = _randomGenerator.Next(1000, 2000);
         var query = new GetDiffResultQuery(nonExistentId);
 
-        // Act & Assert
-        Func<Task> act = async () => await _sender.Send(query);
+        var cancellationToken = CancellationToken.None;
+
+        // Act
+        Func<Task> act = async () => await _sender.Send(query, cancellationToken);
+
+        // Assert
         await act.Should().ThrowAsync<NotFoundException>();
     }
 
@@ -48,11 +55,16 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
         var leftPayload = Convert.FromBase64String("AAAAAA==");
         var rightPayload = Convert.FromBase64String("BBBBBB==");
 
+        var newDiffPayloadCouple = new DiffPayloadCoupleBuilder()
+            .WithId(validId)
+            .WithLeftPayloadValue(leftPayload)
+            .WithRightPayloadValue(rightPayload)
+            .Build();
 
-        var newDiffPayloadCouple = new DiffPayloadCouple(validId, leftPayload, rightPayload);
+        var cancellationToken = CancellationToken.None;
 
-        await _diffCouplesRepository.CreateDiffCoupleAsync(newDiffPayloadCouple, CancellationToken.None);
-        await _unitOfWork.SaveChangesAsync(CancellationToken.None);
+        await _diffCouplesRepository.CreateDiffCoupleAsync(newDiffPayloadCouple, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         var query = new GetDiffResultQuery(validId);
 
@@ -60,13 +72,12 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
         string expectedResult = ResultType.ContentDoNotMatch.ToString();
 
         // Act
-        var result = await _sender.Send(query);
+        var result = await _sender.Send(query, cancellationToken);
 
         // Assert
         result.Should().NotBeNull();
         result.Result.Should().Be(expectedResult);
         result.Diffs.Should().BeEquivalentTo(diffs);
-
     }
 
     [Fact]
@@ -76,14 +87,18 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
         var idWithOnlyLeft = _randomGenerator.Next(0, 1000);
         var leftPayload = Convert.FromBase64String("AAAAAA==");
 
+        var cancellationToken = CancellationToken.None;
+
         var diffPayloadCouple = new DiffPayloadCouple(idWithOnlyLeft, leftPayload, null);
-        await _diffCouplesRepository.CreateDiffCoupleAsync(diffPayloadCouple, CancellationToken.None);
-        await _unitOfWork.SaveChangesAsync(CancellationToken.None);
+        await _diffCouplesRepository.CreateDiffCoupleAsync(diffPayloadCouple, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         var query = new GetDiffResultQuery(idWithOnlyLeft);
 
-        // Act & Assert
-        Func<Task> act = async () => await _sender.Send(query);
+        // Ac
+        Func<Task> act = async () => await _sender.Send(query, cancellationToken);
+
+        // Assert
         await act.Should().ThrowAsync<NotFoundException>();
     }
 
@@ -94,14 +109,18 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
         var idWithOnlyRight = _randomGenerator.Next(0, 1000);
         var rightPayload = Convert.FromBase64String("BBBBBB==");
 
+        var cancellationToken = CancellationToken.None;
+
         var diffPayloadCouple = new DiffPayloadCouple(idWithOnlyRight, null, rightPayload);
-        await _diffCouplesRepository.CreateDiffCoupleAsync(diffPayloadCouple, CancellationToken.None);
-        await _unitOfWork.SaveChangesAsync(CancellationToken.None);
+        await _diffCouplesRepository.CreateDiffCoupleAsync(diffPayloadCouple, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         var query = new GetDiffResultQuery(idWithOnlyRight);
 
-        // Act & Assert
-        Func<Task> act = async () => await _sender.Send(query);
+        // Act
+        Func<Task> act = async () => await _sender.Send(query, cancellationToken);
+
+        // Assert
         await act.Should().ThrowAsync<NotFoundException>();
     }
 
@@ -112,14 +131,16 @@ public class GetDiffResultQueryTests : BaseIntegrationTest
         var idWithEqualSides = _randomGenerator.Next(0, 1000);
         var payload = Convert.FromBase64String("AAAAAA==");
 
+        var cancellationToken = CancellationToken.None;
+
         var diffPayloadCouple = new DiffPayloadCouple(idWithEqualSides, payload, payload);
-        await _diffCouplesRepository.CreateDiffCoupleAsync(diffPayloadCouple, CancellationToken.None);
-        await _unitOfWork.SaveChangesAsync(CancellationToken.None);
+        await _diffCouplesRepository.CreateDiffCoupleAsync(diffPayloadCouple, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         var query = new GetDiffResultQuery(idWithEqualSides);
 
         // Act
-        var result = await _sender.Send(query);
+        var result = await _sender.Send(query, cancellationToken);
 
         // Assert
         result.Should().NotBeNull();
