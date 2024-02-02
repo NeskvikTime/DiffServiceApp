@@ -7,7 +7,7 @@ using FluentAssertions;
 using NSubstitute;
 using TestCommon.Builders;
 
-namespace DiffServiceApp.ApplicationUnitTests.Services;
+namespace DiffServiceApp.Application.UnitTests.Services;
 public class DiffCoupleProcessorTests
 {
     private readonly IDiffProcessor _diffProcessor = Substitute.For<IDiffProcessor>();

@@ -1,8 +1,6 @@
 ﻿using DiffServiceApp.Application.Common.Interfaces;
-using DiffServiceApp.Application.Extensions;
 using DiffServiceApp.Contracts.Exceptions;
 using DiffServiceApp.Domain.Aggregates;
-using DiffServiceApp.Domain.Common.Interfaces;
 using DiffServiceApp.Domain.Models;
 using MediatR;
 
@@ -41,7 +39,7 @@ sealed class UpdateDiffCommandHandler(IDiffCouplesRepository _diffCouplesReposit
 
     private void UpdateDiffPayloadCouple(DiffPayloadCouple diffPayloadCouple, string requestSide, string data)
     {
-        byte[] dataToAssign = data.FromBase64String();
+        byte[] dataToAssign = Convert.FromBase64String(data);
 
         if (requestSide == DiffDirection.Left)
         {
@@ -55,7 +53,7 @@ sealed class UpdateDiffCommandHandler(IDiffCouplesRepository _diffCouplesReposit
 
     private DiffPayloadCouple CreateDiffPayloadCouple(int coupleId, string requestSide, string data)
     {
-        byte[] dataToAssign = data.FromBase64String();
+        byte[] dataToAssign = Convert.FromBase64String(data);
 
         if (requestSide == DiffDirection.Left)
         {

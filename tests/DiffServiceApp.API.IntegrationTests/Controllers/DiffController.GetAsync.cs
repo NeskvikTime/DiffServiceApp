@@ -2,7 +2,7 @@
 using DiffServiceApp.Contracts.Responses;
 using System.Net;
 using System.Net.Http.Json;
-using TestCommon.DiffServiceApp;
+using TestCommon.Common;
 
 namespace DiffServiceApp.API.IntegrationTests.Controllers;
 public class GetAsyncTests : BaseIntegrationTest

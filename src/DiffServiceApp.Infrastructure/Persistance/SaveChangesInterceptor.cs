@@ -1,5 +1,5 @@
+using DiffServiceApp.Application.Common.Interfaces;
 using DiffServiceApp.Domain.Common;
-using DiffServiceApp.Domain.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;

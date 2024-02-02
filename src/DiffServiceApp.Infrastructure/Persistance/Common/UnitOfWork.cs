@@ -1,4 +1,4 @@
-﻿using DiffServiceApp.Domain.Common.Interfaces;
+﻿using DiffServiceApp.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 

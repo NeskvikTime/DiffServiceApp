@@ -3,7 +3,7 @@ using DiffServiceApp.Contracts.Common;
 using DiffServiceApp.Contracts.Exceptions;
 using DiffServiceApp.Domain.Aggregates;
 using DiffServiceApp.Domain.Enums;
-using TestCommon.DiffServiceApp;
+using TestCommon.Common;
 
 namespace DiffServiceApp.Application.SubcutaneousTests.DiffHandler;
 public class GetDiffResultQueryTests : BaseIntegrationTest

@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using Testcontainers.MsSql;
 using Xunit;
 
-namespace TestCommon.DiffServiceApp;
+namespace TestCommon.Common;
 public class ApplicationApiFactory : WebApplicationFactory<IAssemblyMarker>, IAsyncLifetime
 {
     private readonly MsSqlContainer _dbContainer =

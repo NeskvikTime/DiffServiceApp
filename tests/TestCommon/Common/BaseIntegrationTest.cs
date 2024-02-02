@@ -1,11 +1,10 @@
 ﻿using DiffServiceApp.Application.Common.Interfaces;
-using DiffServiceApp.Domain.Common.Interfaces;
 using DiffServiceApp.Infrastructure.Persistance;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace TestCommon.DiffServiceApp;
+namespace TestCommon.Common;
 public abstract class BaseIntegrationTest
     : IClassFixture<ApplicationApiFactory>,
       IDisposable

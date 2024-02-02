@@ -1,5 +1,4 @@
 ﻿using DiffServiceApp.Application.Common.Interfaces;
-using DiffServiceApp.Domain.Common.Interfaces;
 using DiffServiceApp.Infrastructure.Persistance;
 using DiffServiceApp.Infrastructure.Persistance.Common;
 using DiffServiceApp.Infrastructure.Persistance.Repository;

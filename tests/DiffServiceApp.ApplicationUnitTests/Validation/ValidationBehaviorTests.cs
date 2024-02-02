@@ -9,7 +9,7 @@ using MediatR;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 
-namespace DiffServiceApp.ApplicationUnitTests.Validation;
+namespace DiffServiceApp.Application.UnitTests.Validation;
 public class ValidationBehaviorTests
 {
     private readonly IValidator<UpdateDiffCommand> _mockValidator;

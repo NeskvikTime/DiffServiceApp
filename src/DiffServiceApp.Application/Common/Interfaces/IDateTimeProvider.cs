@@ -1,4 +1,4 @@
-namespace DiffServiceApp.Domain.Common.Interfaces;
+namespace DiffServiceApp.Application.Common.Interfaces;
 
 public interface IDateTimeProvider
 {

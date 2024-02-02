@@ -3,7 +3,7 @@ using DiffServiceApp.Domain.Enums;
 using DiffServiceApp.Domain.Models;
 using FluentAssertions;
 
-namespace DiffServiceApp.ApplicationUnitTests.Services;
+namespace DiffServiceApp.Application.UnitTests.Services;
 
 public class DiffProcessorTests
 {
