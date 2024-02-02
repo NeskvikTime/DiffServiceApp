@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiffServiceApp.API.Integrat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiffServiceApp.Application.SubcutaneousTests", "tests\DiffServiceApp.Application.SubcutaneousTests\DiffServiceApp.Application.SubcutaneousTests.csproj", "{6E7A13F2-606B-4F34-9B67-576467A0A85C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffServiceApp.ApplicationUnitTests", "tests\DiffServiceApp.ApplicationUnitTests\DiffServiceApp.ApplicationUnitTests.csproj", "{0D8BAAE6-0FB6-4A87-AC8A-877380C40DDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiffServiceApp.Application.UnitTests", "tests\DiffServiceApp.ApplicationUnitTests\DiffServiceApp.Application.UnitTests.csproj", "{0D8BAAE6-0FB6-4A87-AC8A-877380C40DDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

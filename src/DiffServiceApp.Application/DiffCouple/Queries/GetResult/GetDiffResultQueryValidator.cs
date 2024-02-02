@@ -12,19 +12,23 @@ public class GetDiffResultQueryValidator : AbstractValidator<GetDiffResultQuery>
         _diffCouplesRepository = diffCouplesRepository;
 
         RuleFor(x => x.Id)
-            .CustomAsync(async (id, contect, cancellationToken) =>
-            {
-                if (!await _diffCouplesRepository.DiffCoupleExistsAsync(id, cancellationToken))
-                {
-                    throw new NotFoundException("Diff couple with  Id: '{PropertyValue}' not found");
-                }
-            })
-            .CustomAsync(async (id, contect, cancellationToken) =>
-            {
-                if (!await _diffCouplesRepository.HasBothValuesAssignedAsync(id, cancellationToken))
-                {
-                    throw new NotFoundException("Diff couple with  Id: '{PropertyValue}' not found");
-                }
-            });
+            .CustomAsync(CheckDiffCoupleExistsAsync)
+            .CustomAsync(CheckBothValuesAssignedAsync);
+    }
+
+    private async Task CheckDiffCoupleExistsAsync(int id, ValidationContext<GetDiffResultQuery> context, CancellationToken cancellationToken)
+    {
+        if (!await _diffCouplesRepository.DiffCoupleExistsAsync(id, cancellationToken))
+        {
+            throw new NotFoundException($"Diff couple with Id: '{id}' not found");
+        }
+    }
+
+    private async Task CheckBothValuesAssignedAsync(int id, ValidationContext<GetDiffResultQuery> context, CancellationToken cancellationToken)
+    {
+        if (!await _diffCouplesRepository.HasBothValuesAssignedAsync(id, cancellationToken))
+        {
+            throw new NotFoundException($"Diff couple with Id: '{id}' not found");
+        }
     }
 }
